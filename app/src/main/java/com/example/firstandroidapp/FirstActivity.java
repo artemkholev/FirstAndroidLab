@@ -1,36 +1,40 @@
 package com.example.firstandroidapp;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class FirstActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE = 1;
+    private TextView textViewGreeting;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_first);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.first_activity), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        textViewGreeting = findViewById(R.id.textViewGreeting);
+        Button buttonOpenSecondActivity = findViewById(R.id.buttonOpenSecondActivity);
 
-        Button startSecondActivityButton = findViewById(R.id.openSecondActivity);
-        startSecondActivityButton.setOnClickListener(view -> {
+        buttonOpenSecondActivity.setOnClickListener(v -> {
             Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-            intent.putExtra("welcome_phrase", "Hello");
-            startActivity(intent);
+            intent.putExtra("greeting", "Привет!"); // передаем приветствие
+            startActivityForResult(intent, REQUEST_CODE);
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            String name = data.getStringExtra("name");
+            String greeting = "Привет, " + name + "!";
+            textViewGreeting.setText(greeting);
+        }
     }
 }

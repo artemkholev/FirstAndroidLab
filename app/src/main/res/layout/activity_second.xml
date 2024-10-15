@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/second_activity"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstActivity">
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/second_activity"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:text="Приветствие"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите имя" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отправить" />
+</LinearLayout>
