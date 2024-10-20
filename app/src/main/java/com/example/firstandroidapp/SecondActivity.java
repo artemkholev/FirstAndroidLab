@@ -9,30 +9,26 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SecondActivity extends AppCompatActivity {
-    private EditText editTextName;
+    private EditText editName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        TextView textViewGreeting = findViewById(R.id.textViewGreeting);
-        editTextName = findViewById(R.id.editTextName);
-        Button buttonSubmit = findViewById(R.id.buttonSubmit);
+        TextView message = findViewById(R.id.message);
+        editName = findViewById(R.id.input);
+        Button submitButton = findViewById(R.id.buttonCloseSecondActivity);
 
-        // Получаем приветствие из первой активити
-        Intent intent = getIntent();
-        String greeting = intent.getStringExtra("greeting");
-        textViewGreeting.setText(greeting);
+        String greeting = getIntent().getStringExtra("message");
+        message.setText(greeting);
 
-        buttonSubmit.setOnClickListener(v -> {
-            String name = editTextName.getText().toString();
-
-            // Передаем результат обратно в первую активити
+        submitButton.setOnClickListener(v -> {
+            String name = editName.getText().toString();
             Intent resultIntent = new Intent();
             resultIntent.putExtra("name", name);
             setResult(RESULT_OK, resultIntent);
-            finish(); // Закрываем текущую активити
+            finish();
         });
     }
 }
